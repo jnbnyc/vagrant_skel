@@ -1,0 +1,29 @@
+---
+
+
+nodes:
+  - box: centos/7
+    memory: 2048
+    # cpus: 1
+    # sync_folder:
+    #   host_dir: '.'
+    #   guest_dir: '/vagrant'
+    # ports:
+    #   - 80: 80      # http
+    #   - 3306: 3306  # mysql
+    #   - 5432: 5432  # postgres
+    #   - 3000: 3000  # node services
+    #   - 5000: 5000  # python services
+    private_ip: 192.168.33.11
+    tags:
+      name: centos.vagrant
+      # type: sometype
+      group: centos_servers
+
+ansible:
+  # limit: centos.vagrant  # defaults to all
+  playbook: common.yml  # defaults to site.yml
+  verbosity: '' # override default setting
+  # allow explicit groups definition
+  # groups: |
+  #   "haproxy_servers" => ["centos.vagrant"]
