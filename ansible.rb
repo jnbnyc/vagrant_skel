@@ -59,10 +59,14 @@ $ansible_verbosity = ansible_settings['verbosity'] || 'vv'
 if ansible_settings['tags']
   $ansible_tags    = ansible_settings['tags'].join(',') || ''
 end
-
+if ansible_settings['extra_vars']
+  # $ansible_extra_vars = ansible_settings['extra_vars'].join(',') || ''
+  $ansible_extra_vars = ansible_settings['extra_vars'] || {}
+end
 # for debugging: $ ruby ansible.rb
 # puts ansible_limit
 # puts ansible_playbook
 # puts $ansible_groups
 # puts ansible_verbosity
 # puts $ansible_tags
+# puts $ansible_extra_vars

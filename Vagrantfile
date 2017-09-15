@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
       machine.vm.box = node["box"]
       machine.vm.hostname = node['tags']['name']
       machine.vm.network :private_network, :ip => node['private_ip']
+      # machine.vm.box_url = box_url + node["box"] + ".box"
       #machine.vm.network "private_network", type: "dhcp"
 
 
@@ -74,9 +75,15 @@ Vagrant.configure("2") do |config|
        ansible.playbook = $ansible_playbook
        ansible.groups   = $ansible_groups
        ansible.limit    = $ansible_limit
+      #  ansible.galaxy_role_file = "#{ANSIBLE_ROOT}/requirements.yml"
+      #  ansible.galaxy_roles_path = "#{ANSIBLE_ROOT}/roles"
        if defined?($ansible_tags) && ($ansible_tags != nil)
-         ansible.tags     = $ansible_tags
+         ansible.tags   = $ansible_tags
        end
+       if defined?($ansible_extra_vars) && ($ansible_extra_vars != nil)
+         ansible.extra_vars = $ansible_extra_vars
+       end
+      #  ansible.raw_arguments = ['--sudo']
      end
    end
 
